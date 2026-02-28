@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sean Richardson — Creative & Digital Solutions</title>
+<title>Sean Richardson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,22 +17,21 @@ body {
   overflow-x: hidden;
 }
 
-/* Video Background */
-#bg-video {
+/* Shader background */
+canvas#bg {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  object-fit: cover;
   z-index: -1;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
-/* Top bar */
+/* Header */
 header {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
@@ -41,38 +40,39 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 0.9rem 2rem;
 }
 
-.name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
+.name { font-size: 1.05rem; font-weight: 600; }
 
-.contact-link {
-  color: rgba(255,255,255,0.5);
+.header-right {
+  display: flex; gap: 1.5rem; align-items: center;
+}
+.header-right a {
+  color: rgba(255,255,255,0.4);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
   transition: color 0.2s;
 }
-.contact-link:hover { color: #fff; }
+.header-right a:hover { color: #fff; }
 
-/* Category tabs */
+/* Tabs */
 .tabs {
   display: flex;
-  gap: 0;
   border-top: 1px solid rgba(255,255,255,0.04);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.tabs::-webkit-scrollbar { display: none; }
 
 .tab {
-  padding: 0.75rem 1.5rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.35);
   cursor: pointer;
   border: none;
   background: none;
@@ -81,287 +81,236 @@ header {
   border-bottom: 2px solid transparent;
   font-family: inherit;
 }
+.tab:hover { color: rgba(255,255,255,0.6); }
+.tab.active { color: #fff; border-bottom-color: #fff; }
 
-.tab:hover { color: rgba(255,255,255,0.7); }
-.tab.active {
-  color: #fff;
-  border-bottom-color: #fff;
-}
+/* Main */
+main { padding-top: 105px; }
 
-/* Main content */
-main {
-  padding-top: 110px;
-  min-height: 100vh;
-}
-
-/* Category sections */
-.category {
-  display: none;
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+/* Category */
+.category { display: none; padding: 2rem 0; }
 .category.active { display: block; }
 
-.category-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+.cat-header {
+  padding: 0 2rem;
+  margin-bottom: 1.5rem;
+}
+.cat-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
+.cat-desc { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+/* Carousel */
+.carousel-wrap {
+  position: relative;
+  margin-bottom: 1rem;
 }
 
-.category-desc {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 2rem;
+.carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 2rem 1rem;
+  scrollbar-width: none;
 }
-
-/* Project cards with images */
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.5rem;
-}
+.carousel::-webkit-scrollbar { display: none; }
 
 .card {
+  flex: 0 0 340px;
+  scroll-snap-align: start;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   overflow: hidden;
-  transition: all 0.3s;
-  cursor: default;
+  transition: all 0.25s;
 }
-
 .card:hover {
   border-color: rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.07);
-  transform: translateY(-2px);
 }
 
 .card-img {
   width: 100%;
-  aspect-ratio: 16/10;
+  height: 200px;
   object-fit: cover;
   display: block;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.card-img.placeholder {
-  background: rgba(255,255,255,0.03);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  opacity: 0.3;
-}
-
-.card-body {
-  padding: 1.25rem;
-}
-
-.card-body h3 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.card-body p {
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.6);
-}
-
+.card-body { padding: 1.1rem; }
+.card-body h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+.card-body p { font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.55); }
 .card-link {
   display: inline-block;
-  margin-top: 0.75rem;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
   text-decoration: none;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   transition: color 0.2s;
 }
 .card-link:hover { color: #fff; }
 
-/* Stack tags */
-.stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 2rem;
-}
-
-.stack-tag {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.7rem;
+/* Arrow buttons */
+.carousel-wrap .arr {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-70%);
+  background: rgba(0,0,0,0.7);
   border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.6);
-  letter-spacing: 0.03em;
+  color: #fff;
+  width: 36px; height: 36px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
 }
+.arr:hover { background: rgba(255,255,255,0.15); }
+.arr.left { left: 6px; }
+.arr.right { right: 6px; }
 
-/* Contact section */
+/* Contact */
 .contact-section {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 3rem;
 }
-
-.contact-section h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
 .contact-section a {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-decoration: none;
   border-bottom: 1px solid rgba(255,255,255,0.2);
-  padding-bottom: 2px;
 }
-
 .contact-section p {
-  color: rgba(255,255,255,0.4);
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  .header-top { padding: 0.75rem 1rem; }
-  .tabs { padding: 0 0.5rem; }
-  .tab { padding: 0.6rem 1rem; font-size: 0.65rem; }
-  .projects { grid-template-columns: 1fr; }
-  .category { padding: 1.5rem 1rem; }
-  main { padding-top: 100px; }
+  .card { flex: 0 0 85vw; }
+  .header-top { padding: 0.7rem 1rem; }
+  .carousel { padding: 0 1rem 1rem; }
+  .cat-header { padding: 0 1rem; }
+  .arr { display: none; }
 }
 </style>
 </head>
 <body>
 
-<video id="bg-video" autoplay muted loop playsinline>
-  <source src="bg2.mp4" type="video/mp4">
-</video>
+<canvas id="bg"></canvas>
 
 <header>
   <div class="header-top">
     <span class="name">Sean Richardson</span>
-    <a href="mailto:seandrives009@gmail.com" class="contact-link">seandrives009@gmail.com</a>
+    <div class="header-right">
+      <a href="mailto:seandrives009@gmail.com">Contact</a>
+    </div>
   </div>
   <div class="tabs">
     <button class="tab active" data-cat="all">ALL</button>
     <button class="tab" data-cat="ai">AI & AUTOMATION</button>
     <button class="tab" data-cat="web">WEB DEV</button>
-    <button class="tab" data-cat="design">DESIGN & BRANDING</button>
-    <button class="tab" data-cat="media">MEDIA & CONTENT</button>
+    <button class="tab" data-cat="design">DESIGN</button>
+    <button class="tab" data-cat="media">MEDIA</button>
   </div>
 </header>
 
-<main>
-
-  <!-- ALL -->
-  <div class="category active" id="cat-all">
-    <div class="category-title">All Work</div>
-    <div class="category-desc">AI systems, web development, design, and media production. Southern California.</div>
-    <div class="projects" id="all-grid"></div>
-  </div>
-
-  <!-- AI -->
-  <div class="category" id="cat-ai">
-    <div class="category-title">AI & Automation</div>
-    <div class="category-desc">Autonomous agents, ML pipelines, and intelligent automation systems.</div>
-    <div class="projects" id="ai-grid"></div>
-  </div>
-
-  <!-- WEB -->
-  <div class="category" id="cat-web">
-    <div class="category-title">Web Development</div>
-    <div class="category-desc">Full-stack sites, performance optimization, and custom web applications.</div>
-    <div class="projects" id="web-grid"></div>
-  </div>
-
-  <!-- DESIGN -->
-  <div class="category" id="cat-design">
-    <div class="category-title">Design & Branding</div>
-    <div class="category-desc">Logo systems, infographics, AI-generated visuals, and brand identity.</div>
-    <div class="projects" id="design-grid"></div>
-  </div>
-
-  <!-- MEDIA -->
-  <div class="category" id="cat-media">
-    <div class="category-title">Media & Content</div>
-    <div class="category-desc">Video production, audio engineering, and content pipelines.</div>
-    <div class="projects" id="media-grid"></div>
-  </div>
-
-  <div class="contact-section">
-    <h2>Let's work together</h2>
-    <a href="mailto:seandrives009@gmail.com">seandrives009@gmail.com</a>
-    <p>Based in Southern California</p>
-  </div>
-</main>
+<main id="main"></main>
 
 <script>
 const projects = [
-  // AI
-  { cat: 'ai', title: 'Autonomous AI Agent System', img: 'img/empire-overview.jpg',
-    desc: 'Multi-platform AI agent with persistent memory, cron scheduling, cross-channel messaging across Telegram, Discord, iMessage, and email. Self-healing with fallback models. Handles 20+ simultaneous conversations.' },
-  { cat: 'ai', title: 'AI Stem Splitting Pipeline', img: 'img/shader-bg.jpg',
-    desc: 'Automated audio stem separation using ML models. Downloads any song, isolates vocals, drums, bass, guitar, piano. Individual drum extraction (kick, snare, hi-hat, ride, crash). Under 60 seconds per song.' },
-  { cat: 'ai', title: 'Semantic Search Engine', img: 'img/recursive-improvement.jpg',
-    desc: 'Custom embedding-based search over 14,000+ text chunks. OpenAI embeddings with cosine similarity for instant semantic retrieval across massive document collections.' },
-  { cat: 'ai', title: 'Automated Outreach System', img: 'img/discord-workflows.jpg',
-    desc: 'Reddit and email automation managing 20+ simultaneous client conversations. Browser automation for lead generation, intelligent response routing, and conversation management.' },
-  { cat: 'ai', title: 'AI Grant Writer', img: 'img/calendar-prep.jpg',
-    desc: 'Automated research and drafting for small business grants. Pulls eligibility data, matches to frameworks like 5C and Genesis for Good, produces submission-ready applications.' },
-  { cat: 'ai', title: 'Canvas LMS Automation', img: 'img/todo-tackler.jpg',
-    desc: 'API-driven course automation. Auto-downloads assignments, reads rubrics, generates essays calibrated to professor voice, manages quiz submissions. Full academic workflow.' },
+  // AI — matched images
+  { cat: 'ai', title: 'Autonomous AI Agent', img: 'img/empire-overview.jpg',
+    desc: 'Multi-platform AI agent with persistent memory, cron scheduling, cross-channel messaging. Telegram, Discord, iMessage, email. Self-healing fallback models.' },
+  { cat: 'ai', title: 'Audio Stem Separation', img: 'img/shader-bg.jpg',
+    desc: 'ML pipeline that downloads any song and splits into vocals, drums, bass, guitar, piano in under 60 seconds. Individual drum hit extraction.' },
+  { cat: 'ai', title: 'Automated Outreach Engine', img: 'img/discord-workflows.jpg',
+    desc: 'Browser automation for Reddit/email lead gen. Managed 20+ simultaneous client conversations with intelligent response routing.' },
+  { cat: 'ai', title: 'Semantic Search (14K+ chunks)', img: 'img/recursive-improvement.jpg',
+    desc: 'Custom OpenAI embedding index over 14,000 text chunks. Cosine similarity search with instant retrieval across massive document collections.' },
+  { cat: 'ai', title: 'Grant Application Writer', img: 'img/calendar-prep.jpg',
+    desc: 'Automated small business grant research, eligibility matching, and full application drafting. Matched to frameworks like Genesis for Good and 5C.' },
 
-  // WEB
-  { cat: 'web', title: 'Crypto Casino Leaderboard', img: 'img/prophitz.jpg',
-    desc: '3 complete design concepts with animated counters, live stats ticker, interactive sortable tables, prize distribution charts, and countdown timers.',
+  // WEB — real screenshots
+  { cat: 'web', title: 'Prophitz Crypto Leaderboard', img: 'img/prophitz.jpg',
+    desc: 'Animated counters, live stats, sortable tables, prize charts, countdown timers. 3 design variants delivered.',
     link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
-  { cat: 'web', title: 'Shopify Store Demos', img: 'img/shopify.jpg',
-    desc: 'Custom Shopify storefront demos with product grids, cart functionality, and responsive design.',
+  { cat: 'web', title: 'Shopify Storefront Demos', img: 'img/shopify.jpg',
+    desc: 'Custom Shopify product grids, responsive layouts, and cart functionality demos.',
     link: 'https://seanysean12345.github.io/shopify-demos/' },
-  { cat: 'web', title: 'WooCommerce Performance Fix', img: 'img/weekly-checkin.jpg',
-    desc: 'Diagnosed 100% CPU / 503 errors on client store. Found bloated sessions table (29MB, 45% of DB). Cleared caches, ran migration. CPU spikes eliminated.' },
-  { cat: 'web', title: 'GLSL Shader Backgrounds', img: 'img/shader-bg.jpg',
-    desc: 'Custom WebGL shaders for animated website backgrounds. Procedural fog, noise, scan lines, film grain. Zero bandwidth, infinite seamless loop. This site uses one.' },
+  { cat: 'web', title: 'WooCommerce 503 Fix', img: 'img/weekly-checkin.jpg',
+    desc: 'Client store hitting 100% CPU. Found 29MB bloated sessions table (45% of DB). Cleared caches, ran migration. Spikes eliminated.' },
+  { cat: 'web', title: 'GLSL Animated Backgrounds', img: 'img/shader-bg.jpg',
+    desc: 'Procedural WebGL shaders — fog, noise, scan lines, film grain. Zero bandwidth, infinite loop. This site runs one live right now.' },
 
-  // DESIGN
+  // DESIGN — actual work
   { cat: 'design', title: 'SK Dasher — Logo & Brand', img: 'img/sk-dasher-logo.png',
-    desc: 'Full brand identity for SK Dasher. Logo design, color palette, typography system, and brand guidelines. SVG + PDF deliverables.' },
-  { cat: 'design', title: 'AI Workflow Infographics', img: 'img/empire-overview.jpg',
-    desc: 'Suite of AI-generated infographics visualizing system architecture, workflow automation, and strategic planning frameworks.' },
+    desc: 'Full brand identity. Logo, color palette, typography, brand guidelines. SVG + PDF deliverables.' },
+  { cat: 'design', title: 'Empire Overview Infographic', img: 'img/empire-overview.jpg',
+    desc: 'AI-generated strategic planning infographic showing system architecture and workflow automation across platforms.' },
   { cat: 'design', title: 'Recursive Self-Improvement', img: 'img/recursive-improvement.jpg',
-    desc: 'AI-generated visualization of recursive self-improvement concepts. Multiple iterations refined through prompt engineering.' },
+    desc: 'Multi-iteration AI visualization. 8 versions refined through progressive prompt engineering and style transfer.' },
   { cat: 'design', title: 'Valentine Demon Series', img: 'img/valentine-art.jpg',
-    desc: '16-iteration AI art series. Dark romantic aesthetic with demon/angel themes. Refined through progressive prompt engineering across multiple models.' },
-  { cat: 'design', title: 'Reverse Prompting System', img: 'img/reverse-prompting.jpg',
-    desc: 'Visual breakdown of the reverse prompting technique for AI taste profiling. Used to extract aesthetic preferences through reaction analysis.' },
+    desc: '16-iteration AI art series. Dark romantic aesthetic, demon/angel themes. Iterative prompt refinement across models.' },
+  { cat: 'design', title: 'Reverse Prompting Visual', img: 'img/reverse-prompting.jpg',
+    desc: 'Infographic breaking down the reverse prompting technique for AI taste profiling and preference extraction.' },
+  { cat: 'design', title: 'Discord Workflow Maps', img: 'img/discord-workflows.jpg',
+    desc: 'Visual workflow documentation for multi-channel Discord automation, scheduling, and notification routing.' },
 
   // MEDIA
-  { cat: 'media', title: 'AI Video Generation', img: 'img/shader-bg.jpg',
-    desc: 'Remotion templates and Veo 2/3.1 video generation. Configurable promo videos with AI voiceover via ElevenLabs. Scalable template system for rapid content production.' },
-  { cat: 'media', title: 'Audio Stem Engineering', img: 'img/discord-workflows.jpg',
-    desc: 'ML-powered audio separation pipeline. 6-stem splitting (vocals, drums, bass, guitar, piano, other) plus individual drum hit extraction. Processing any song in under 60 seconds.' },
-  { cat: 'media', title: 'Content Pipeline Systems', img: 'img/todo-tackler.jpg',
-    desc: 'Multi-platform content automation. Transcription, summarization, cross-posting, TTS integration. Built for scale across Telegram, Discord, and web.' },
+  { cat: 'media', title: 'AI Video Generation', img: 'img/todo-tackler.jpg',
+    desc: 'Remotion templates + Veo video generation. Configurable promo videos with ElevenLabs AI voiceover. Scalable production system.' },
+  { cat: 'media', title: 'Stem Splitting Pipeline', img: 'img/shader-bg.jpg',
+    desc: '6-stem audio separation (vocals, drums, bass, guitar, piano, other) plus granular drum extraction. Any song, under 60 seconds.' },
+  { cat: 'media', title: 'Content Automation', img: 'img/calendar-prep.jpg',
+    desc: 'Multi-platform pipelines — automated transcription, summarization, cross-posting. TTS at scale across Telegram, Discord, web.' },
 ];
 
-function renderCard(p) {
-  return `<div class="card">
-    <img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'">
-    <div class="card-body">
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-      ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
-    </div>
-  </div>`;
+const cats = {
+  all: { title: 'All Work', desc: 'AI systems, web development, design, and media production.' },
+  ai: { title: 'AI & Automation', desc: 'Autonomous agents, ML pipelines, and intelligent automation.' },
+  web: { title: 'Web Development', desc: 'Sites, apps, and performance optimization.' },
+  design: { title: 'Design', desc: 'Brand identity, infographics, and AI-generated visuals.' },
+  media: { title: 'Media', desc: 'Video, audio engineering, and content systems.' },
+};
+
+function buildCategory(catKey) {
+  const info = cats[catKey];
+  const items = catKey === 'all' ? projects : projects.filter(p => p.cat === catKey);
+  const id = 'car-' + catKey;
+  return `
+    <div class="category${catKey === 'all' ? ' active' : ''}" id="cat-${catKey}">
+      <div class="cat-header">
+        <div class="cat-title">${info.title}</div>
+        <div class="cat-desc">${info.desc}</div>
+      </div>
+      <div class="carousel-wrap">
+        <button class="arr left" onclick="scroll_('${id}',-350)">‹</button>
+        <div class="carousel" id="${id}">
+          ${items.map(p => `
+            <div class="card">
+              <img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy">
+              <div class="card-body">
+                <h3>${p.title}</h3>
+                <p>${p.desc}</p>
+                ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <button class="arr right" onclick="scroll_('${id}',350)">›</button>
+      </div>
+    </div>`;
 }
 
-// Fill grids
-document.getElementById('all-grid').innerHTML = projects.map(renderCard).join('');
-['ai','web','design','media'].forEach(cat => {
-  document.getElementById(cat + '-grid').innerHTML =
-    projects.filter(p => p.cat === cat).map(renderCard).join('');
-});
+document.getElementById('main').innerHTML =
+  Object.keys(cats).map(buildCategory).join('') +
+  `<div class="contact-section">
+    <a href="mailto:seandrives009@gmail.com">seandrives009@gmail.com</a>
+    <p>Southern California</p>
+  </div>`;
 
 // Tab switching
 document.querySelectorAll('.tab').forEach(tab => {
@@ -372,6 +321,67 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.getElementById('cat-' + tab.dataset.cat).classList.add('active');
   });
 });
+
+// Carousel scroll
+function scroll_(id, dx) {
+  document.getElementById(id).scrollBy({ left: dx, behavior: 'smooth' });
+}
+
+// === ULTRA-LIGHT SHADER (2 octaves, quarter res, 15fps) ===
+const canvas = document.getElementById('bg');
+const gl = canvas.getContext('webgl');
+if (gl) {
+  function resize() {
+    canvas.width = Math.floor(window.innerWidth * 0.25);
+    canvas.height = Math.floor(window.innerHeight * 0.25);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  window.addEventListener('resize', resize); resize();
+
+  const vs = `attribute vec2 a;void main(){gl_Position=vec4(a,0,1);}`;
+  const fs = `precision mediump float;
+uniform float t;uniform vec2 r;
+float h(vec2 p){p=fract(p*vec2(443.8,441.4));p+=dot(p,p.yx+19.19);return fract((p.x+p.y)*p.x);}
+float fog(vec2 u,float t){float f=0.0,a=0.5,q=1.0;
+for(int i=0;i<2;i++){vec2 p=u*q+t*0.04*float(i+1);vec2 g=floor(p);vec2 r=fract(p);
+r=r*r*(3.0-2.0*r);f+=a*mix(mix(h(g),h(g+vec2(1,0)),r.x),mix(h(g+vec2(0,1)),h(g+vec2(1,1)),r.x),r.y);
+a*=0.5;q*=2.0;}return f;}
+void main(){vec2 u=gl_FragCoord.xy/r;float T=t*0.3;
+float lp=mod(t,10.0)/10.0*6.283;
+float f1=fog(u+vec2(sin(lp)*0.15,cos(lp)*0.1),T);
+float f2=fog(u*1.5+vec2(cos(lp*0.7)*0.12,sin(lp*0.7)*0.15),T*0.7);
+float v=mix(f1,f2,0.5);
+float pk=smoothstep(0.3,0.7,fog(u*2.0+vec2(sin(lp*1.1)*0.2,cos(lp*0.9)*0.15),T*0.8));
+float cy=smoothstep(0.35,0.75,fog(u*1.8+vec2(cos(lp*0.8)*0.18,sin(lp*1.2)*0.12),T*1.1));
+float pu=smoothstep(0.35,0.7,fog(u*1.4+vec2(sin(lp*1.5)*0.12,cos(lp*1.1)*0.18),T*1.2));
+vec3 c=vec3(v*0.5);
+c+=vec3(1.0,0.08,0.58)*pk*0.3;
+c+=vec3(0.0,0.94,1.0)*cy*0.25;
+c+=vec3(0.55,0.1,0.9)*pu*0.25;
+vec2 vi=u*(1.0-u);c*=pow(vi.x*vi.y*15.0,0.3)*0.85;
+gl_FragColor=vec4(c,1);}`;
+
+  function mk(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  const pg=gl.createProgram();
+  gl.attachShader(pg,mk(gl.VERTEX_SHADER,vs));
+  gl.attachShader(pg,mk(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(pg);gl.useProgram(pg);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const a=gl.getAttribLocation(pg,'a');gl.enableVertexAttribArray(a);
+  gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+  const ut=gl.getUniformLocation(pg,'t'),ur=gl.getUniformLocation(pg,'r');
+  let last=0;
+  function draw(now){
+    requestAnimationFrame(draw);
+    if(now-last<66)return; // 15fps cap
+    last=now;
+    gl.uniform1f(ut,now*0.001);
+    gl.uniform2f(ur,canvas.width,canvas.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  }
+  requestAnimationFrame(draw);
+}
 </script>
 </body>
 </html>
