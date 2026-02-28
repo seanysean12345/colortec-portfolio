@@ -17,13 +17,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Shader background */
 canvas#bg {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: -1;
-  opacity: 0.45;
+  opacity: 0.4;
 }
 
 /* Header */
@@ -45,24 +44,18 @@ header {
 
 .name { font-size: 1.05rem; font-weight: 600; }
 
-.header-right {
-  display: flex; gap: 1.5rem; align-items: center;
-}
 .header-right a {
   color: rgba(255,255,255,0.4);
   text-decoration: none;
   font-size: 0.75rem;
-  letter-spacing: 0.05em;
   transition: color 0.2s;
 }
 .header-right a:hover { color: #fff; }
 
-/* Tabs */
 .tabs {
   display: flex;
   border-top: 1px solid rgba(255,255,255,0.04);
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 .tabs::-webkit-scrollbar { display: none; }
@@ -85,96 +78,103 @@ header {
 .tab.active { color: #fff; border-bottom-color: #fff; }
 
 /* Main */
-main { padding-top: 105px; }
+main { padding-top: 100px; }
 
-/* Category */
-.category { display: none; padding: 2rem 0; }
+.category { display: none; }
 .category.active { display: block; }
 
-.cat-header {
-  padding: 0 2rem;
-  margin-bottom: 1.5rem;
-}
-.cat-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
+.cat-header { padding: 1.5rem 2rem 1rem; }
+.cat-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.25rem; }
 .cat-desc { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
 
-/* Carousel */
-.carousel-wrap {
+/* AUTO-SCROLLING CAROUSEL */
+.carousel-outer {
   position: relative;
-  margin-bottom: 1rem;
+  overflow: hidden;
+  padding: 0.5rem 0 2rem;
 }
 
-.carousel {
+.carousel-track {
   display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 2rem 1rem;
-  scrollbar-width: none;
+  gap: 1.5rem;
+  animation: scroll-left 30s linear infinite;
+  width: max-content;
 }
-.carousel::-webkit-scrollbar { display: none; }
 
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Cards — BIG, 50vh */
 .card {
-  flex: 0 0 340px;
-  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 55vh;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   overflow: hidden;
-  transition: all 0.25s;
+  transition: all 0.3s;
 }
 .card:hover {
-  border-color: rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
 }
 
 .card-img {
   width: 100%;
-  height: 200px;
+  height: 38vh;
   object-fit: cover;
   display: block;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.card-body { padding: 1.1rem; }
-.card-body h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
-.card-body p { font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.55); }
+.card-body { padding: 1.1rem 1.2rem; }
+.card-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; }
+.card-body p { font-size: 0.78rem; line-height: 1.5; color: rgba(255,255,255,0.5); }
 .card-link {
   display: inline-block;
-  margin-top: 0.6rem;
+  margin-top: 0.5rem;
   font-size: 0.7rem;
   color: rgba(255,255,255,0.35);
   text-decoration: none;
-  letter-spacing: 0.04em;
   transition: color 0.2s;
 }
 .card-link:hover { color: #fff; }
 
-/* Arrow buttons */
-.carousel-wrap .arr {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-70%);
-  background: rgba(0,0,0,0.7);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #fff;
-  width: 36px; height: 36px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+/* No-image projects at bottom */
+.text-projects {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
-.arr:hover { background: rgba(255,255,255,0.15); }
-.arr.left { left: 6px; }
-.arr.right { right: 6px; }
+.text-projects h3 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+}
+.text-item {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+}
+.text-item-title { font-size: 0.85rem; font-weight: 500; }
+.text-item-desc { font-size: 0.75rem; color: rgba(255,255,255,0.35); text-align: right; }
 
 /* Contact */
 .contact-section {
   text-align: center;
-  padding: 4rem 2rem 3rem;
+  padding: 3rem 2rem;
 }
 .contact-section a {
   color: #fff;
@@ -183,17 +183,16 @@ main { padding-top: 105px; }
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 .contact-section p {
-  color: rgba(255,255,255,0.35);
-  margin-top: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.5rem;
   font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {
-  .card { flex: 0 0 85vw; }
+  .card { width: 80vw; }
+  .card-img { height: 30vh; }
   .header-top { padding: 0.7rem 1rem; }
-  .carousel { padding: 0 1rem 1rem; }
-  .cat-header { padding: 0 1rem; }
-  .arr { display: none; }
+  .cat-header { padding: 1rem; }
 }
 </style>
 </head>
@@ -210,109 +209,117 @@ main { padding-top: 105px; }
   </div>
   <div class="tabs">
     <button class="tab active" data-cat="all">ALL</button>
-    <button class="tab" data-cat="ai">AI & AUTOMATION</button>
-    <button class="tab" data-cat="web">WEB DEV</button>
+    <button class="tab" data-cat="web">WEB</button>
     <button class="tab" data-cat="design">DESIGN</button>
-    <button class="tab" data-cat="media">MEDIA</button>
   </div>
 </header>
 
 <main id="main"></main>
 
 <script>
-const projects = [
-  // AI — matched images
-  { cat: 'ai', title: 'Autonomous AI Agent', img: 'img/empire-overview.jpg',
-    desc: 'Multi-platform AI agent with persistent memory, cron scheduling, cross-channel messaging. Telegram, Discord, iMessage, email. Self-healing fallback models.' },
-  { cat: 'ai', title: 'Audio Stem Separation', img: 'img/shader-bg.jpg',
-    desc: 'ML pipeline that downloads any song and splits into vocals, drums, bass, guitar, piano in under 60 seconds. Individual drum hit extraction.' },
-  { cat: 'ai', title: 'Automated Outreach Engine', img: 'img/discord-workflows.jpg',
-    desc: 'Browser automation for Reddit/email lead gen. Managed 20+ simultaneous client conversations with intelligent response routing.' },
-  { cat: 'ai', title: 'Semantic Search (14K+ chunks)', img: 'img/recursive-improvement.jpg',
-    desc: 'Custom OpenAI embedding index over 14,000 text chunks. Cosine similarity search with instant retrieval across massive document collections.' },
-  { cat: 'ai', title: 'Grant Application Writer', img: 'img/calendar-prep.jpg',
-    desc: 'Automated small business grant research, eligibility matching, and full application drafting. Matched to frameworks like Genesis for Good and 5C.' },
-
-  // WEB — real screenshots
+// ONLY projects with real matching images
+const withImages = [
+  // WEB
   { cat: 'web', title: 'Prophitz Crypto Leaderboard', img: 'img/prophitz.jpg',
-    desc: 'Animated counters, live stats, sortable tables, prize charts, countdown timers. 3 design variants delivered.',
+    desc: 'Animated counters, live stats, sortable tables, prize charts. 3 design concepts.',
     link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
   { cat: 'web', title: 'Shopify Storefront Demos', img: 'img/shopify.jpg',
-    desc: 'Custom Shopify product grids, responsive layouts, and cart functionality demos.',
+    desc: 'Custom product grids, responsive layouts, cart functionality.',
     link: 'https://seanysean12345.github.io/shopify-demos/' },
-  { cat: 'web', title: 'WooCommerce 503 Fix', img: 'img/weekly-checkin.jpg',
-    desc: 'Client store hitting 100% CPU. Found 29MB bloated sessions table (45% of DB). Cleared caches, ran migration. Spikes eliminated.' },
-  { cat: 'web', title: 'GLSL Animated Backgrounds', img: 'img/shader-bg.jpg',
-    desc: 'Procedural WebGL shaders — fog, noise, scan lines, film grain. Zero bandwidth, infinite loop. This site runs one live right now.' },
 
-  // DESIGN — actual work
+  // DESIGN
   { cat: 'design', title: 'SK Dasher — Logo & Brand', img: 'img/sk-dasher-logo.png',
-    desc: 'Full brand identity. Logo, color palette, typography, brand guidelines. SVG + PDF deliverables.' },
-  { cat: 'design', title: 'Empire Overview Infographic', img: 'img/empire-overview.jpg',
-    desc: 'AI-generated strategic planning infographic showing system architecture and workflow automation across platforms.' },
+    desc: 'Full brand identity. Logo, palette, typography, guidelines.' },
+  { cat: 'design', title: 'Empire Overview', img: 'img/empire-overview.jpg',
+    desc: 'Strategic planning infographic — system architecture and workflow automation.' },
   { cat: 'design', title: 'Recursive Self-Improvement', img: 'img/recursive-improvement.jpg',
-    desc: 'Multi-iteration AI visualization. 8 versions refined through progressive prompt engineering and style transfer.' },
+    desc: '8 iterations refined through progressive prompt engineering.' },
   { cat: 'design', title: 'Valentine Demon Series', img: 'img/valentine-art.jpg',
-    desc: '16-iteration AI art series. Dark romantic aesthetic, demon/angel themes. Iterative prompt refinement across models.' },
-  { cat: 'design', title: 'Reverse Prompting Visual', img: 'img/reverse-prompting.jpg',
-    desc: 'Infographic breaking down the reverse prompting technique for AI taste profiling and preference extraction.' },
+    desc: '16-iteration AI art series. Dark romantic, demon/angel aesthetic.' },
+  { cat: 'design', title: 'Reverse Prompting', img: 'img/reverse-prompting.jpg',
+    desc: 'Visual breakdown of AI taste profiling through reaction analysis.' },
   { cat: 'design', title: 'Discord Workflow Maps', img: 'img/discord-workflows.jpg',
-    desc: 'Visual workflow documentation for multi-channel Discord automation, scheduling, and notification routing.' },
+    desc: 'Multi-channel automation, scheduling, and notification routing.' },
+  { cat: 'design', title: 'Calendar & Scheduling', img: 'img/calendar-prep.jpg',
+    desc: 'AI-generated planning and scheduling workflow visualization.' },
+  { cat: 'design', title: 'Todo System Design', img: 'img/todo-tackler.jpg',
+    desc: 'Task management system infographic with priority flows.' },
+  { cat: 'design', title: 'Weekly Check-in Dashboard', img: 'img/weekly-checkin.jpg',
+    desc: 'Automated check-in workflow visualization and status tracking.' },
+];
 
-  // MEDIA
-  { cat: 'media', title: 'AI Video Generation', img: 'img/todo-tackler.jpg',
-    desc: 'Remotion templates + Veo video generation. Configurable promo videos with ElevenLabs AI voiceover. Scalable production system.' },
-  { cat: 'media', title: 'Stem Splitting Pipeline', img: 'img/shader-bg.jpg',
-    desc: '6-stem audio separation (vocals, drums, bass, guitar, piano, other) plus granular drum extraction. Any song, under 60 seconds.' },
-  { cat: 'media', title: 'Content Automation', img: 'img/calendar-prep.jpg',
-    desc: 'Multi-platform pipelines — automated transcription, summarization, cross-posting. TTS at scale across Telegram, Discord, web.' },
+// Projects without images — listed at bottom
+const noImages = [
+  { title: 'Autonomous AI Agent', desc: 'Multi-platform, persistent memory, self-healing' },
+  { title: 'Audio Stem Separation', desc: 'ML pipeline, 6-stem split, under 60 seconds' },
+  { title: 'Semantic Search Engine', desc: '14,000+ chunks, OpenAI embeddings' },
+  { title: 'Automated Outreach', desc: '20+ simultaneous conversations, browser automation' },
+  { title: 'Grant Application Writer', desc: 'Research, eligibility matching, full drafts' },
+  { title: 'WooCommerce 503 Fix', desc: 'CPU spikes eliminated, DB optimization' },
+  { title: 'GLSL Shader Backgrounds', desc: 'Procedural fog, seamless loop, zero bandwidth' },
+  { title: 'AI Video Generation', desc: 'Remotion + Veo + ElevenLabs voiceover' },
+  { title: 'Content Automation', desc: 'Transcription, summarization, cross-posting' },
 ];
 
 const cats = {
-  all: { title: 'All Work', desc: 'AI systems, web development, design, and media production.' },
-  ai: { title: 'AI & Automation', desc: 'Autonomous agents, ML pipelines, and intelligent automation.' },
-  web: { title: 'Web Development', desc: 'Sites, apps, and performance optimization.' },
-  design: { title: 'Design', desc: 'Brand identity, infographics, and AI-generated visuals.' },
-  media: { title: 'Media', desc: 'Video, audio engineering, and content systems.' },
+  all: { title: 'All Work', desc: 'Web development, design, and AI systems.' },
+  web: { title: 'Web Development', desc: 'Sites, apps, and live demos.' },
+  design: { title: 'Design', desc: 'Brand identity, infographics, AI art.' },
 };
 
-function buildCategory(catKey) {
-  const info = cats[catKey];
-  const items = catKey === 'all' ? projects : projects.filter(p => p.cat === catKey);
-  const id = 'car-' + catKey;
+function makeCards(items) {
+  // Duplicate for infinite scroll
+  const doubled = [...items, ...items];
+  return doubled.map(p => `
+    <div class="card">
+      <img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy">
+      <div class="card-body">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function buildCat(key) {
+  const info = cats[key];
+  const items = key === 'all' ? withImages : withImages.filter(p => p.cat === key);
+  // Adjust scroll speed based on number of items
+  const dur = items.length * 5;
   return `
-    <div class="category${catKey === 'all' ? ' active' : ''}" id="cat-${catKey}">
+    <div class="category${key === 'all' ? ' active' : ''}" id="cat-${key}">
       <div class="cat-header">
         <div class="cat-title">${info.title}</div>
         <div class="cat-desc">${info.desc}</div>
       </div>
-      <div class="carousel-wrap">
-        <button class="arr left" onclick="scroll_('${id}',-350)">‹</button>
-        <div class="carousel" id="${id}">
-          ${items.map(p => `
-            <div class="card">
-              <img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy">
-              <div class="card-body">
-                <h3>${p.title}</h3>
-                <p>${p.desc}</p>
-                ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
-              </div>
+      <div class="carousel-outer">
+        <div class="carousel-track" style="animation-duration:${dur}s">
+          ${makeCards(items)}
+        </div>
+      </div>
+      ${key === 'all' ? `
+        <div class="text-projects">
+          <h3>Also built (no visuals yet)</h3>
+          ${noImages.map(p => `
+            <div class="text-item">
+              <span class="text-item-title">${p.title}</span>
+              <span class="text-item-desc">${p.desc}</span>
             </div>
           `).join('')}
         </div>
-        <button class="arr right" onclick="scroll_('${id}',350)">›</button>
-      </div>
+      ` : ''}
     </div>`;
 }
 
 document.getElementById('main').innerHTML =
-  Object.keys(cats).map(buildCategory).join('') +
+  Object.keys(cats).map(buildCat).join('') +
   `<div class="contact-section">
     <a href="mailto:seandrives009@gmail.com">seandrives009@gmail.com</a>
     <p>Southern California</p>
   </div>`;
 
-// Tab switching
+// Tabs
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -322,12 +329,7 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
-// Carousel scroll
-function scroll_(id, dx) {
-  document.getElementById(id).scrollBy({ left: dx, behavior: 'smooth' });
-}
-
-// === ULTRA-LIGHT SHADER (2 octaves, quarter res, 15fps) ===
+// === ULTRA-LIGHT SHADER ===
 const canvas = document.getElementById('bg');
 const gl = canvas.getContext('webgl');
 if (gl) {
@@ -337,7 +339,6 @@ if (gl) {
     gl.viewport(0, 0, canvas.width, canvas.height);
   }
   window.addEventListener('resize', resize); resize();
-
   const vs = `attribute vec2 a;void main(){gl_Position=vec4(a,0,1);}`;
   const fs = `precision mediump float;
 uniform float t;uniform vec2 r;
@@ -355,12 +356,9 @@ float pk=smoothstep(0.3,0.7,fog(u*2.0+vec2(sin(lp*1.1)*0.2,cos(lp*0.9)*0.15),T*0
 float cy=smoothstep(0.35,0.75,fog(u*1.8+vec2(cos(lp*0.8)*0.18,sin(lp*1.2)*0.12),T*1.1));
 float pu=smoothstep(0.35,0.7,fog(u*1.4+vec2(sin(lp*1.5)*0.12,cos(lp*1.1)*0.18),T*1.2));
 vec3 c=vec3(v*0.5);
-c+=vec3(1.0,0.08,0.58)*pk*0.3;
-c+=vec3(0.0,0.94,1.0)*cy*0.25;
-c+=vec3(0.55,0.1,0.9)*pu*0.25;
+c+=vec3(1.0,0.08,0.58)*pk*0.3;c+=vec3(0.0,0.94,1.0)*cy*0.25;c+=vec3(0.55,0.1,0.9)*pu*0.25;
 vec2 vi=u*(1.0-u);c*=pow(vi.x*vi.y*15.0,0.3)*0.85;
 gl_FragColor=vec4(c,1);}`;
-
   function mk(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
   const pg=gl.createProgram();
   gl.attachShader(pg,mk(gl.VERTEX_SHADER,vs));
@@ -374,7 +372,7 @@ gl_FragColor=vec4(c,1);}`;
   let last=0;
   function draw(now){
     requestAnimationFrame(draw);
-    if(now-last<66)return; // 15fps cap
+    if(now-last<66)return;
     last=now;
     gl.uniform1f(ut,now*0.001);
     gl.uniform2f(ur,canvas.width,canvas.height);
