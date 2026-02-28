@@ -374,8 +374,9 @@ const canvas = document.getElementById('c');
 const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
 
 function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  // Render at half res for performance, CSS stretches to full
+  canvas.width = Math.floor(window.innerWidth * 0.5);
+  canvas.height = Math.floor(window.innerHeight * 0.5);
   gl.viewport(0, 0, canvas.width, canvas.height);
 }
 window.addEventListener('resize', resize);
@@ -410,19 +411,16 @@ float pixelNoise(vec2 uv, float scale, float t) {
   return hash3(vec3(grid, floor(t)));
 }
 
-// Smooth layered fog — 8 octaves for rich organic cloud shapes
+// Smooth fog — 4 octaves, cubic interpolation (GPU friendly)
 float fog(vec2 uv, float t) {
   float f = 0.0;
   float amp = 0.5;
   float freq = 1.0;
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 4; i++) {
     vec2 p = uv * freq + t * 0.04 * float(i + 1);
-    // Rotate each octave slightly for more organic swirl
-    float angle = float(i) * 0.5;
-    p = vec2(p.x * cos(angle) - p.y * sin(angle), p.x * sin(angle) + p.y * cos(angle));
     vec2 g = floor(p);
     vec2 fr = fract(p);
-    fr = fr * fr * fr * (fr * (fr * 6.0 - 15.0) + 10.0); // quintic interpolation for smoother curves
+    fr = fr * fr * (3.0 - 2.0 * fr);
     float a = hash(g);
     float b = hash(g + vec2(1.0, 0.0));
     float c = hash(g + vec2(0.0, 1.0));
@@ -541,11 +539,15 @@ gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 const uTime = gl.getUniformLocation(prog, 'u_time');
 const uRes = gl.getUniformLocation(prog, 'u_res');
 
+// Cap at 30fps to save GPU
+let lastFrame = 0;
 function render(t) {
+  requestAnimationFrame(render);
+  if (t - lastFrame < 33) return;
+  lastFrame = t;
   gl.uniform1f(uTime, t * 0.001);
   gl.uniform2f(uRes, canvas.width, canvas.height);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-  requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
 </script>
