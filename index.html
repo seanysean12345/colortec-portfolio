@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sean Richardson - Creative & Digital Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+body { 
+  background: #000; 
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+canvas { 
+  display: block; 
+  width: 100vw; 
+  height: 100vh; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+
+nav a:hover {
+  opacity: 0.7;
+}
+
+/* Sections */
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+.panel {
+  background: none;
+  border: none;
+  padding: 3rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Hero */
+#hero {
+  text-align: center;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.tagline {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  opacity: 0.7;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Work Section */
+#work .panel {
+  padding: 3rem 2rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 3rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.project-card {
+  background: none;
+  border-left: 2px solid rgba(255,255,255,0.15);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-left-color: rgba(255,255,255,0.5);
+  transform: translateX(4px);
+}
+
+.project-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.project-card p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Skills Section */
+#skills .panel {
+  text-align: center;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.skill-tag {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8rem;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+
+.skill-tag:hover {
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* Contact Section */
+#contact .panel {
+  text-align: center;
+}
+
+.contact-email {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin: 2rem 0;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+
+.contact-email:hover {
+  opacity: 0.7;
+}
+
+.location {
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-top: 1rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  nav {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .panel {
+    padding: 2rem 1.5rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  section {
+    padding: 3rem 1rem;
+  }
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="content">
+  <nav>
+    <a href="#ai">AI</a>
+    <a href="#web">WEB</a>
+    <a href="#design">DESIGN</a>
+    <a href="#media">MEDIA</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+
+  <section id="hero">
+    <div class="panel">
+      <h1>Sean Richardson</h1>
+      <div class="subtitle">Creative & Digital Solutions</div>
+      <p class="tagline">AI systems, web development, design, and media production. Southern California.</p>
+    </div>
+  </section>
+
+  <section id="ai">
+    <div class="panel">
+      <h2>AI & Automation</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Autonomous AI Agent System</h3>
+          <p>Multi-platform AI agent with persistent memory, cron scheduling, and cross-channel messaging. Handles Telegram, Discord, iMessage, and email simultaneously. Self-healing with fallback models.</p>
+        </div>
+        <div class="project-card">
+          <h3>AI Stem Splitting Pipeline</h3>
+          <p>Automated audio stem separation using ML models. Downloads any song, isolates vocals, drums, bass, guitar, piano. Individual drum hit extraction (kick, snare, hi-hat, ride, crash).</p>
+        </div>
+        <div class="project-card">
+          <h3>Automated Outreach System</h3>
+          <p>Reddit and email automation managing 20+ simultaneous client conversations. Browser automation for lead gen, intelligent response routing, conversation management.</p>
+        </div>
+        <div class="project-card">
+          <h3>AI Grant Writer</h3>
+          <p>Automated research and drafting for small business grants. Pulls eligibility data, matches to frameworks, produces submission-ready applications.</p>
+        </div>
+        <div class="project-card">
+          <h3>Semantic Search Engine</h3>
+          <p>Built custom embedding-based search over 14,000+ text chunks. OpenAI embeddings, cosine similarity, instant semantic retrieval across massive document collections.</p>
+        </div>
+        <div class="project-card">
+          <h3>Canvas LMS Automation</h3>
+          <p>API-driven course automation. Auto-downloads assignments, reads rubrics, generates essays calibrated to professor voice, manages quiz submissions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="web">
+    <div class="panel">
+      <h2>Web Development</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Crypto Casino Leaderboard</h3>
+          <p>3 complete design concepts with animated counters, live stats ticker, interactive sortable tables, prize distribution charts, countdown timers. Deployed to GitHub Pages.</p>
+        </div>
+        <div class="project-card">
+          <h3>WooCommerce Performance Fix</h3>
+          <p>Diagnosed 100% CPU / 503 errors on client's store. Found bloated sessions table (29MB, 45% of DB). Cleared caches, ran migration. CPU spikes eliminated.</p>
+        </div>
+        <div class="project-card">
+          <h3>GLSL Shader Backgrounds</h3>
+          <p>Custom WebGL shaders for animated website backgrounds. Procedural fog, noise, scan lines, film grain. Zero bandwidth, infinite seamless loop. You're looking at one right now.</p>
+        </div>
+        <div class="project-card">
+          <h3>Portfolio & Business Sites</h3>
+          <p>One-page portfolio sites, business landing pages, Shopify stores. Vercel deployment, responsive design, performance-first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="design">
+    <div class="panel">
+      <h2>Design & Branding</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Brand Identity Systems</h3>
+          <p>Logo design, color palettes, typography systems, brand guidelines. Research-driven identity development matched to target audience.</p>
+        </div>
+        <div class="project-card">
+          <h3>AI Image Generation</h3>
+          <p>Nano Banana Pro, DALL-E, Midjourney workflows. Mockup generation, concept art, marketing visuals. Prompt engineering for consistent brand-aligned output.</p>
+        </div>
+        <div class="project-card">
+          <h3>UI/UX Design</h3>
+          <p>Dashboard interfaces, mobile-first layouts, interactive prototypes. Taste-driven design system with documented preferences and cross-domain pattern recognition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="media">
+    <div class="panel">
+      <h2>Media Production</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>AI Video Generation</h3>
+          <p>Remotion templates, Veo 2/3.1 video generation, configurable promo videos with AI voiceover via ElevenLabs. Scalable template system.</p>
+        </div>
+        <div class="project-card">
+          <h3>Audio Engineering</h3>
+          <p>Stem splitting, sample identification, music production tools. ML-powered audio separation pipeline processing any song in under 60 seconds.</p>
+        </div>
+        <div class="project-card">
+          <h3>Content Systems</h3>
+          <p>Multi-platform content pipelines. Automated transcription, summarization, cross-posting. TTS integration for voice content at scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills-section">
+    <div class="panel" style="text-align:center;">
+      <h2>Stack</h2>
+      <div class="skills-list">
+        <span class="skill-tag">Claude / GPT</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">WebGL / GLSL</span>
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">n8n</span>
+        <span class="skill-tag">Vercel</span>
+        <span class="skill-tag">Supabase</span>
+        <span class="skill-tag">Tailwind</span>
+        <span class="skill-tag">Remotion</span>
+        <span class="skill-tag">ElevenLabs</span>
+        <span class="skill-tag">Browser Automation</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Docker</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="panel" style="text-align:center;">
+      <h2>Contact</h2>
+      <a href="mailto:seandrives009@gmail.com" class="contact-email">seandrives009@gmail.com</a>
+      <p class="location">Southern California</p>
+    </div>
+  </section>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  gl.viewport(0, 0, canvas.width, canvas.height);
+}
+window.addEventListener('resize', resize);
+resize();
+
+const vertSrc = `
+attribute vec2 a_pos;
+void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
+`;
+
+const fragSrc = `
+precision highp float;
+uniform float u_time;
+uniform vec2 u_res;
+
+// Hash functions for noise
+float hash(vec2 p) {
+  p = fract(p * vec2(443.897, 441.423));
+  p += dot(p, p.yx + 19.19);
+  return fract((p.x + p.y) * p.x);
+}
+
+float hash3(vec3 p) {
+  p = fract(p * vec3(443.897, 441.423, 437.195));
+  p += dot(p, p.yzx + 19.19);
+  return fract((p.x + p.y + p.z) * p.x);
+}
+
+// Pixelated noise - creates the grid texture
+float pixelNoise(vec2 uv, float scale, float t) {
+  vec2 grid = floor(uv * scale);
+  return hash3(vec3(grid, floor(t)));
+}
+
+// Smooth layered fog — 8 octaves for rich organic cloud shapes
+float fog(vec2 uv, float t) {
+  float f = 0.0;
+  float amp = 0.5;
+  float freq = 1.0;
+  for (int i = 0; i < 8; i++) {
+    vec2 p = uv * freq + t * 0.04 * float(i + 1);
+    // Rotate each octave slightly for more organic swirl
+    float angle = float(i) * 0.5;
+    p = vec2(p.x * cos(angle) - p.y * sin(angle), p.x * sin(angle) + p.y * cos(angle));
+    vec2 g = floor(p);
+    vec2 fr = fract(p);
+    fr = fr * fr * fr * (fr * (fr * 6.0 - 15.0) + 10.0); // quintic interpolation for smoother curves
+    float a = hash(g);
+    float b = hash(g + vec2(1.0, 0.0));
+    float c = hash(g + vec2(0.0, 1.0));
+    float d = hash(g + vec2(1.0, 1.0));
+    f += amp * mix(mix(a, b, fr.x), mix(c, d, fr.x), fr.y);
+    amp *= 0.5;
+    freq *= 2.0;
+  }
+  return f;
+}
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / u_res;
+  // Loop period - 10 seconds, everything cycles back
+  float loopTime = 10.0;
+  float t = u_time * 0.3;
+  float tLoop = mod(u_time, loopTime) / loopTime; // 0-1 over loop period
+  float tAngle = tLoop * 6.28318; // full circle for seamless loop
+  
+  // Minimal pixel texture — fog shapes are the star
+  float pixScale = min(u_res.x, u_res.y) * 0.8;
+  
+  // Layered fog movement — circular paths for seamless looping, cloud-like flow
+  float f1 = fog(uv + vec2(sin(tAngle) * 0.15, cos(tAngle) * 0.1), t);
+  float f2 = fog(uv * 1.5 + vec2(cos(tAngle * 0.7) * 0.12, sin(tAngle * 0.7) * 0.15), t * 0.7);
+  float f3 = fog(uv * 0.8 + vec2(sin(tAngle * 1.3) * 0.1, cos(tAngle * 1.3) * 0.08), t * 1.3);
+  
+  // Pixelated noise — seamless loop using circular noise sampling
+  // Instead of linear time, sample noise on a circle in 3D so start=end
+  float nAngle1 = tLoop * 6.28318;
+  float nAngle2 = tLoop * 6.28318 * 0.8;
+  float nAngle3 = tLoop * 6.28318 * 1.2;
+  // Use sin/cos as the time dimension — naturally loops
+  float px1 = pixelNoise(uv + vec2(sin(nAngle1) * 0.1, cos(nAngle1) * 0.1), pixScale, sin(nAngle1) * 10.0 + 50.0);
+  float px2 = pixelNoise(uv + vec2(cos(nAngle2) * 0.08, sin(nAngle2) * 0.08), pixScale * 0.6, cos(nAngle2) * 8.0 + 50.0);
+  float px3 = pixelNoise(uv + vec2(sin(nAngle3) * 0.12, cos(nAngle3) * 0.06), pixScale * 0.8, sin(nAngle3) * 12.0 + 50.0);
+  
+  // Mix fog with pixel noise
+  float fogVal = mix(f1, f2, 0.5) * 0.7 + f3 * 0.3;
+  float pixVal = mix(px1, px2, 0.4);
+  
+  // Almost all fog, pixel noise barely there — just a hint of texture
+  float combined = mix(fogVal, pixVal, 0.05);
+  
+  // Color channels — circular looping paths for cloud-like drift
+  float pink = smoothstep(0.3, 0.7, fog(uv * 2.0 + vec2(sin(tAngle * 1.1) * 0.2, cos(tAngle * 0.9) * 0.15), t * 0.8));
+  float cyan = smoothstep(0.35, 0.75, fog(uv * 1.8 + vec2(cos(tAngle * 0.8) * 0.18, sin(tAngle * 1.2) * 0.12), t * 1.1));
+  float green = smoothstep(0.4, 0.8, fog(uv * 2.2 + vec2(sin(tAngle * 1.3) * 0.14, cos(tAngle * 0.7) * 0.16), t * 0.6));
+  float orange = smoothstep(0.45, 0.8, fog(uv * 1.6 + vec2(cos(tAngle * 0.6) * 0.2, sin(tAngle * 1.4) * 0.1), t * 0.9));
+  float purple = smoothstep(0.35, 0.7, fog(uv * 1.4 + vec2(sin(tAngle * 1.5) * 0.12, cos(tAngle * 1.1) * 0.18), t * 1.2));
+  
+  // Base grayscale fog
+  vec3 gray = vec3(combined * 0.6);
+  
+  // Mix in braindance colors
+  vec3 col = gray;
+  col += vec3(1.0, 0.08, 0.58) * pink * 0.4 * pixVal;       // hot pink
+  col += vec3(0.0, 0.94, 1.0) * cyan * 0.35 * px2;           // cyan
+  col += vec3(0.15, 0.9, 0.3) * green * 0.25 * px3;          // green
+  col += vec3(1.0, 0.55, 0.1) * orange * 0.3 * pixVal;       // thermal orange
+  col += vec3(0.55, 0.1, 0.9) * purple * 0.3 * px1;          // purple
+  
+  // Add some white static pixels
+  float whitePx = pixelNoise(uv, pixScale * 1.2, t * 4.0);
+  col += vec3(whitePx * 0.15 * step(0.85, whitePx));
+  
+  // Scan lines
+  float scanline = 0.92 + 0.08 * sin(gl_FragCoord.y * 1.5 + t * 2.0);
+  col *= scanline;
+  
+  // Fine horizontal scan lines
+  float fineScan = 0.95 + 0.05 * step(0.5, fract(gl_FragCoord.y * 0.5));
+  col *= fineScan;
+  
+  // Film grain
+  float grain = hash(gl_FragCoord.xy + fract(t * 100.0)) * 0.08;
+  col += grain - 0.04;
+  
+  // Vignette - darken edges
+  vec2 vig = uv * (1.0 - uv);
+  float vigVal = vig.x * vig.y * 15.0;
+  vigVal = pow(vigVal, 0.3);
+  col *= vigVal;
+  
+  // Overall darkness
+  col *= 0.85;
+  
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+function compile(type, src) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(s));
+  }
+  return s;
+}
+
+const prog = gl.createProgram();
+gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+gl.linkProgram(prog);
+gl.useProgram(prog);
+
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+const aPos = gl.getAttribLocation(prog, 'a_pos');
+gl.enableVertexAttribArray(aPos);
+gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+const uTime = gl.getUniformLocation(prog, 'u_time');
+const uRes = gl.getUniformLocation(prog, 'u_res');
+
+function render(t) {
+  gl.uniform1f(uTime, t * 0.001);
+  gl.uniform2f(uRes, canvas.width, canvas.height);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  requestAnimationFrame(render);
+}
+requestAnimationFrame(render);
+</script>
+</body>
+</html>
