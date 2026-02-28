@@ -22,16 +22,15 @@ canvas#bg {
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: -1;
-  opacity: 0.4;
+  opacity: 0.7;
 }
 
-/* Header */
 header {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(16px);
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
@@ -39,11 +38,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem 2rem;
+  padding: 0.85rem 2rem;
 }
-
 .name { font-size: 1.05rem; font-weight: 600; }
-
 .header-right a {
   color: rgba(255,255,255,0.4);
   text-decoration: none;
@@ -59,9 +56,8 @@ header {
   scrollbar-width: none;
 }
 .tabs::-webkit-scrollbar { display: none; }
-
 .tab {
-  padding: 0.65rem 1.4rem;
+  padding: 0.6rem 1.4rem;
   font-size: 0.65rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -77,247 +73,190 @@ header {
 .tab:hover { color: rgba(255,255,255,0.6); }
 .tab.active { color: #fff; border-bottom-color: #fff; }
 
-/* Main */
 main { padding-top: 100px; }
 
 .category { display: none; }
 .category.active { display: block; }
 
-.cat-header { padding: 1.5rem 2rem 1rem; }
-.cat-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.25rem; }
-.cat-desc { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+.cat-header { padding: 1.5rem 2rem 0.75rem; }
+.cat-title { font-size: 1.2rem; font-weight: 600; }
 
-/* AUTO-SCROLLING CAROUSEL */
+/* ======= CAROUSEL ======= */
 .carousel-outer {
-  position: relative;
   overflow: hidden;
-  padding: 0.5rem 0 2rem;
+  padding: 1rem 0 1.5rem;
 }
 
 .carousel-track {
   display: flex;
-  gap: 1.5rem;
-  animation: scroll-left 30s linear infinite;
+  gap: 1.25rem;
   width: max-content;
+  animation: marquee var(--dur, 25s) linear infinite;
 }
+.carousel-track:hover { animation-play-state: paused; }
 
-.carousel-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes scroll-left {
+@keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* Cards — BIG, 50vh */
+/* ======= CARDS — BIG ======= */
 .card {
   flex: 0 0 auto;
-  width: 55vh;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  width: 60vh;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
   overflow: hidden;
-  transition: all 0.3s;
+  transition: border-color 0.3s;
 }
-.card:hover {
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.08);
-}
+.card:hover { border-color: rgba(255,255,255,0.3); }
 
-.card-img {
+.card-img-wrap {
   width: 100%;
-  height: 38vh;
-  object-fit: cover;
+  height: 45vh;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.card-body { padding: 1.1rem 1.2rem; }
-.card-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; }
-.card-body p { font-size: 0.78rem; line-height: 1.5; color: rgba(255,255,255,0.5); }
+.card-body { padding: 1rem 1.2rem; }
+.card-body h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
+.card-body p { font-size: 0.75rem; line-height: 1.5; color: rgba(255,255,255,0.45); }
 .card-link {
   display: inline-block;
   margin-top: 0.5rem;
   font-size: 0.7rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.3);
   text-decoration: none;
   transition: color 0.2s;
 }
 .card-link:hover { color: #fff; }
 
-/* No-image projects at bottom */
-.text-projects {
-  padding: 2rem;
-  max-width: 1000px;
+/* ======= TEXT LIST ======= */
+.text-list {
+  max-width: 800px;
   margin: 0 auto;
+  padding: 1.5rem 2rem 2rem;
 }
-.text-projects h3 {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 1rem;
+.text-list-title {
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 0.75rem;
 }
-.text-item {
-  padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+.text-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 2rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  gap: 1.5rem;
 }
-.text-item-title { font-size: 0.85rem; font-weight: 500; }
-.text-item-desc { font-size: 0.75rem; color: rgba(255,255,255,0.35); text-align: right; }
+.text-row span:first-child { font-size: 0.82rem; font-weight: 500; }
+.text-row span:last-child { font-size: 0.72rem; color: rgba(255,255,255,0.3); text-align: right; }
 
-/* Contact */
 .contact-section {
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 2.5rem 2rem 3rem;
 }
 .contact-section a {
-  color: #fff;
-  font-size: 1rem;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  color: #fff; font-size: 0.95rem; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 .contact-section p {
-  color: rgba(255,255,255,0.3);
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
+  color: rgba(255,255,255,0.25); margin-top: 0.5rem; font-size: 0.75rem;
 }
 
 @media (max-width: 768px) {
-  .card { width: 80vw; }
-  .card-img { height: 30vh; }
+  .card { width: 85vw; }
+  .card-img-wrap { height: 35vh; }
   .header-top { padding: 0.7rem 1rem; }
   .cat-header { padding: 1rem; }
+  .text-list { padding: 1rem; }
 }
 </style>
 </head>
 <body>
-
 <canvas id="bg"></canvas>
 
 <header>
   <div class="header-top">
     <span class="name">Sean Richardson</span>
-    <div class="header-right">
-      <a href="mailto:seandrives009@gmail.com">Contact</a>
-    </div>
+    <div class="header-right"><a href="mailto:seandrives009@gmail.com">Contact</a></div>
   </div>
   <div class="tabs">
-    <button class="tab active" data-cat="all">ALL</button>
-    <button class="tab" data-cat="web">WEB</button>
-    <button class="tab" data-cat="design">DESIGN</button>
+    <button class="tab active" data-cat="all">ALL WORK</button>
+    <button class="tab" data-cat="web">WEBSITES</button>
   </div>
 </header>
 
-<main id="main"></main>
-
-<script>
-// ONLY projects with real matching images
-const withImages = [
-  // WEB
-  { cat: 'web', title: 'Prophitz Crypto Leaderboard', img: 'img/prophitz.jpg',
-    desc: 'Animated counters, live stats, sortable tables, prize charts. 3 design concepts.',
-    link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
-  { cat: 'web', title: 'Shopify Storefront Demos', img: 'img/shopify.jpg',
-    desc: 'Custom product grids, responsive layouts, cart functionality.',
-    link: 'https://seanysean12345.github.io/shopify-demos/' },
-
-  // DESIGN
-  { cat: 'design', title: 'SK Dasher — Logo & Brand', img: 'img/sk-dasher-logo.png',
-    desc: 'Full brand identity. Logo, palette, typography, guidelines.' },
-  { cat: 'design', title: 'Empire Overview', img: 'img/empire-overview.jpg',
-    desc: 'Strategic planning infographic — system architecture and workflow automation.' },
-  { cat: 'design', title: 'Recursive Self-Improvement', img: 'img/recursive-improvement.jpg',
-    desc: '8 iterations refined through progressive prompt engineering.' },
-  { cat: 'design', title: 'Valentine Demon Series', img: 'img/valentine-art.jpg',
-    desc: '16-iteration AI art series. Dark romantic, demon/angel aesthetic.' },
-  { cat: 'design', title: 'Reverse Prompting', img: 'img/reverse-prompting.jpg',
-    desc: 'Visual breakdown of AI taste profiling through reaction analysis.' },
-  { cat: 'design', title: 'Discord Workflow Maps', img: 'img/discord-workflows.jpg',
-    desc: 'Multi-channel automation, scheduling, and notification routing.' },
-  { cat: 'design', title: 'Calendar & Scheduling', img: 'img/calendar-prep.jpg',
-    desc: 'AI-generated planning and scheduling workflow visualization.' },
-  { cat: 'design', title: 'Todo System Design', img: 'img/todo-tackler.jpg',
-    desc: 'Task management system infographic with priority flows.' },
-  { cat: 'design', title: 'Weekly Check-in Dashboard', img: 'img/weekly-checkin.jpg',
-    desc: 'Automated check-in workflow visualization and status tracking.' },
-];
-
-// Projects without images — listed at bottom
-const noImages = [
-  { title: 'Autonomous AI Agent', desc: 'Multi-platform, persistent memory, self-healing' },
-  { title: 'Audio Stem Separation', desc: 'ML pipeline, 6-stem split, under 60 seconds' },
-  { title: 'Semantic Search Engine', desc: '14,000+ chunks, OpenAI embeddings' },
-  { title: 'Automated Outreach', desc: '20+ simultaneous conversations, browser automation' },
-  { title: 'Grant Application Writer', desc: 'Research, eligibility matching, full drafts' },
-  { title: 'WooCommerce 503 Fix', desc: 'CPU spikes eliminated, DB optimization' },
-  { title: 'GLSL Shader Backgrounds', desc: 'Procedural fog, seamless loop, zero bandwidth' },
-  { title: 'AI Video Generation', desc: 'Remotion + Veo + ElevenLabs voiceover' },
-  { title: 'Content Automation', desc: 'Transcription, summarization, cross-posting' },
-];
-
-const cats = {
-  all: { title: 'All Work', desc: 'Web development, design, and AI systems.' },
-  web: { title: 'Web Development', desc: 'Sites, apps, and live demos.' },
-  design: { title: 'Design', desc: 'Brand identity, infographics, AI art.' },
-};
-
-function makeCards(items) {
-  // Duplicate for infinite scroll
-  const doubled = [...items, ...items];
-  return doubled.map(p => `
-    <div class="card">
-      <img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy">
-      <div class="card-body">
-        <h3>${p.title}</h3>
-        <p>${p.desc}</p>
-        ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
-      </div>
+<main>
+  <div class="category active" id="cat-all">
+    <div class="cat-header"><div class="cat-title">Recent Work</div></div>
+    <div class="carousel-outer">
+      <div class="carousel-track" style="--dur:35s" id="track-all"></div>
     </div>
-  `).join('');
-}
+    <div class="text-list">
+      <div class="text-list-title">Also built</div>
+      <div class="text-row"><span>WooCommerce Performance Fix</span><span>Diagnosed 100% CPU, cleared 29MB bloated DB, spikes eliminated</span></div>
+      <div class="text-row"><span>Autonomous AI Agent</span><span>Multi-platform agent — Telegram, Discord, iMessage, email</span></div>
+      <div class="text-row"><span>Audio Stem Separation</span><span>ML pipeline, 6-stem split, any song under 60 seconds</span></div>
+      <div class="text-row"><span>GLSL Shader Backgrounds</span><span>Procedural animated fog — this background is one</span></div>
+    </div>
+  </div>
 
-function buildCat(key) {
-  const info = cats[key];
-  const items = key === 'all' ? withImages : withImages.filter(p => p.cat === key);
-  // Adjust scroll speed based on number of items
-  const dur = items.length * 5;
-  return `
-    <div class="category${key === 'all' ? ' active' : ''}" id="cat-${key}">
-      <div class="cat-header">
-        <div class="cat-title">${info.title}</div>
-        <div class="cat-desc">${info.desc}</div>
-      </div>
-      <div class="carousel-outer">
-        <div class="carousel-track" style="animation-duration:${dur}s">
-          ${makeCards(items)}
-        </div>
-      </div>
-      ${key === 'all' ? `
-        <div class="text-projects">
-          <h3>Also built (no visuals yet)</h3>
-          ${noImages.map(p => `
-            <div class="text-item">
-              <span class="text-item-title">${p.title}</span>
-              <span class="text-item-desc">${p.desc}</span>
-            </div>
-          `).join('')}
-        </div>
-      ` : ''}
-    </div>`;
-}
+  <div class="category" id="cat-web">
+    <div class="cat-header"><div class="cat-title">Websites</div></div>
+    <div class="carousel-outer">
+      <div class="carousel-track" style="--dur:28s" id="track-web"></div>
+    </div>
+  </div>
 
-document.getElementById('main').innerHTML =
-  Object.keys(cats).map(buildCat).join('') +
-  `<div class="contact-section">
+  <div class="contact-section">
     <a href="mailto:seandrives009@gmail.com">seandrives009@gmail.com</a>
     <p>Southern California</p>
+  </div>
+</main>
+
+<script>
+const work = [
+  { title: 'Prophitz × Razed Leaderboard', img: 'img/prophitz.jpg',
+    desc: '$5,000 prize pool. Animated counters, live stats, sortable rankings.',
+    link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
+  { title: 'Streetwear Store', img: 'img/shopify-streetwear.jpg',
+    desc: 'Shopify storefront. Product grid, responsive layout, full cart.',
+    link: 'https://seanysean12345.github.io/shopify-demos/streetwear.html' },
+  { title: 'Coffee Shop Store', img: 'img/shopify-coffee.jpg',
+    desc: 'Shopify storefront. Clean product display, mobile-first design.',
+    link: 'https://seanysean12345.github.io/shopify-demos/coffee.html' },
+  { title: 'Tech Accessories Store', img: 'img/shopify-tech.jpg',
+    desc: 'Shopify storefront. Product cards, category filters, responsive.',
+    link: 'https://seanysean12345.github.io/shopify-demos/tech-store.html' },
+];
+
+function card(p) {
+  return `<div class="card">
+    <div class="card-img-wrap"><img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy"></div>
+    <div class="card-body">
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
+    </div>
   </div>`;
+}
+
+// Duplicate for infinite scroll
+const allCards = [...work, ...work].map(card).join('');
+document.getElementById('track-all').innerHTML = allCards;
+document.getElementById('track-web').innerHTML = allCards;
 
 // Tabs
 document.querySelectorAll('.tab').forEach(tab => {
@@ -329,7 +268,7 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
-// === ULTRA-LIGHT SHADER ===
+// === SHADER (ultra-light: 2 octaves, quarter res, 15fps) ===
 const canvas = document.getElementById('bg');
 const gl = canvas.getContext('webgl');
 if (gl) {
