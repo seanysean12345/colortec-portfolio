@@ -43,36 +43,55 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: center;
-  gap: 3rem;
-  background: rgba(0,0,0,0.3);
-  backdrop-filter: blur(10px);
+  align-items: baseline;
+  gap: 2.5rem;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px);
   z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 nav a {
-  color: #fff;
+  color: rgba(255,255,255,0.6);
   text-decoration: none;
   font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: opacity 0.2s;
+  transition: color 0.2s;
 }
 
-nav a:hover {
-  opacity: 0.7;
+nav a:hover, nav a.active {
+  color: #fff;
 }
 
 /* Sections */
 section {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 2rem;
+}
+
+section:first-of-type {
+  padding-top: 5rem;
 }
 
 .panel {
@@ -83,32 +102,10 @@ section {
   width: 100%;
 }
 
-/* Hero */
-#hero {
-  text-align: center;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  letter-spacing: 0.02em;
-}
-
-.subtitle {
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  opacity: 0.9;
-}
-
-.tagline {
-  font-size: clamp(0.875rem, 2vw, 1rem);
-  opacity: 0.7;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
+/* No hero — content starts immediately */
+h1 { display: none; }
+.subtitle { display: none; }
+.tagline { display: none; }
 
 /* Work Section */
 #work .panel {
@@ -233,20 +230,15 @@ h2 {
 
 <div id="content">
   <nav>
-    <a href="#ai">AI</a>
-    <a href="#web">WEB</a>
-    <a href="#design">DESIGN</a>
-    <a href="#media">MEDIA</a>
-    <a href="#contact">CONTACT</a>
-  </nav>
-
-  <section id="hero">
-    <div class="panel">
-      <h1>Sean Richardson</h1>
-      <div class="subtitle">Creative & Digital Solutions</div>
-      <p class="tagline">AI systems, web development, design, and media production. Southern California.</p>
+    <span class="nav-name">Sean Richardson</span>
+    <div class="nav-links">
+      <a href="#ai">AI</a>
+      <a href="#web">WEB</a>
+      <a href="#design">DESIGN</a>
+      <a href="#media">MEDIA</a>
+      <a href="#contact">CONTACT</a>
     </div>
-  </section>
+  </nav>
 
   <section id="ai">
     <div class="panel">
