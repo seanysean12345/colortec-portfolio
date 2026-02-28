@@ -243,11 +243,10 @@ main { padding-top: 100px; }
 
 @media (max-width: 768px) {
   .card { width: 85vw; }
-  .card-img-wrap { height: 40vh; }
   .header-top { padding: 0.7rem 1rem; }
   .cat-header { padding: 1rem; }
   .text-list { padding: 1rem; }
-  .carousel-outer { min-height: 60vh; }
+  .carousel-outer { min-height: 50vh; }
   .card-wrapper.left { transform: translateX(-100%) scale(0.75); }
   .card-wrapper.right { transform: translateX(100%) scale(0.75); }
 }
@@ -314,10 +313,8 @@ main { padding-top: 100px; }
 
 <script>
 const work = [
-  { cat: 'design', title: '24K Dashooter — Logo', img: 'img/24k-dashooter-logo.jpg',
-    desc: 'Brand logo design. Gold 3D lettering with film strip motif.' },
-  { cat: 'design', title: '24K Dashooter — Birthday Invite', img: 'img/birthday-card.jpg',
-    desc: 'Custom Roblox-themed party invitation. Full layout and typography.' },
+  { cat: 'design', title: '24K Dashooter — Logo', img: 'img/24k-dashooter-logo.jpg' },
+  { cat: 'design', title: '24K Dashooter — Birthday Invite', img: 'img/birthday-card.jpg' },
   { cat: 'web', title: 'Prophitz × Razed Leaderboard', video: 'img/prophitz.mp4',
     desc: '$5,000 prize pool. Animated counters, live stats, sortable rankings.',
     link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
@@ -336,13 +333,14 @@ function card(p) {
   const media = p.video
     ? `<video class="card-video" src="${p.video}" autoplay muted loop playsinline></video>`
     : `<img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy">`;
+  const body = (p.desc || p.link) ? `<div class="card-body">
+      <h3>${p.title}</h3>
+      ${p.desc ? `<p>${p.desc}</p>` : ''}
+      ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
+    </div>` : '';
   return `<div class="card">
     <div class="card-img-wrap">${media}</div>
-    <div class="card-body">
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-      ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
-    </div>
+    ${body}
   </div>`;
 }
 
