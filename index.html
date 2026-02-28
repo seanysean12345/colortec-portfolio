@@ -15,6 +15,8 @@ body {
   font-family: 'Space Grotesk', sans-serif;
   color: #fff;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 
 canvas#bg {
@@ -29,7 +31,7 @@ header {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
@@ -112,13 +114,19 @@ main { padding-top: 100px; }
 
 .card-wrapper {
   position: absolute;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(0) scale(1) translateY(0); }
+  50% { transform: translateX(0) scale(1) translateY(-4px); }
 }
 
 .card-wrapper.center {
   transform: translateX(0) scale(1);
   opacity: 1;
   z-index: 3;
+  animation: float 3s ease-in-out infinite;
 }
 
 .card-wrapper.left {
@@ -143,12 +151,15 @@ main { padding-top: 100px; }
 /* ======= CARDS ======= */
 .card {
   width: 70vw;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.06);
   overflow: hidden;
-  transition: border-color 0.3s;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.card:hover { border-color: rgba(255,255,255,0.3); }
+.card:hover { 
+  border-color: rgba(255,255,255,0.15);
+  transform: scale(1.02);
+}
 
 .card-img-wrap {
   width: 100%;
@@ -159,13 +170,13 @@ main { padding-top: 100px; }
   display: block;
 }
 
-.card-body { padding: 1.2rem 1.5rem; }
-.card-body h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.card-body { padding: 0.8rem 1rem; }
+.card-body h3 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
 .card-body p { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.5); }
 .card-link {
   display: inline-block;
   margin-top: 0.6rem;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: rgba(255,255,255,0.4);
   text-decoration: none;
   transition: color 0.2s;
@@ -186,8 +197,8 @@ main { padding-top: 100px; }
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: rgba(255,255,255,0.2);
   border: none;
@@ -201,7 +212,7 @@ main { padding-top: 100px; }
 }
 
 .dot.active {
-  background: rgba(255,255,255,0.9);
+  background: #fff;
   transform: scale(1.2);
 }
 
@@ -269,24 +280,15 @@ main { padding-top: 100px; }
 
 <main>
   <div class="category active" id="cat-all">
-    <div class="cat-header"><div class="cat-title">Recent Work</div></div>
     <div class="carousel-outer">
       <div class="carousel-container">
         <div class="carousel-track" id="track-all"></div>
       </div>
       <div class="carousel-dots" id="dots-all"></div>
     </div>
-    <div class="text-list">
-      <div class="text-list-title">Also built</div>
-      <div class="text-row"><span>WooCommerce Performance Fix</span><span>Diagnosed 100% CPU, cleared 29MB bloated DB, spikes eliminated</span></div>
-      <div class="text-row"><span>Autonomous AI Agent</span><span>Multi-platform agent — Telegram, Discord, iMessage, email</span></div>
-      <div class="text-row"><span>Audio Stem Separation</span><span>ML pipeline, 6-stem split, any song under 60 seconds</span></div>
-      <div class="text-row"><span>GLSL Shader Backgrounds</span><span>Procedural animated fog — this background is one</span></div>
-    </div>
   </div>
 
   <div class="category" id="cat-design">
-    <div class="cat-header"><div class="cat-title">Design</div></div>
     <div class="carousel-outer">
       <div class="carousel-container">
         <div class="carousel-track" id="track-design"></div>
@@ -296,7 +298,6 @@ main { padding-top: 100px; }
   </div>
 
   <div class="category" id="cat-web">
-    <div class="cat-header"><div class="cat-title">Websites</div></div>
     <div class="carousel-outer">
       <div class="carousel-container">
         <div class="carousel-track" id="track-web"></div>
@@ -333,11 +334,10 @@ function card(p) {
   const media = p.video
     ? `<video class="card-video" src="${p.video}" autoplay muted loop playsinline></video>`
     : `<img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy">`;
-  const body = (p.desc || p.link) ? `<div class="card-body">
+  const body = `<div class="card-body">
       <h3>${p.title}</h3>
-      ${p.desc ? `<p>${p.desc}</p>` : ''}
       ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
-    </div>` : '';
+    </div>`;
   return `<div class="card">
     <div class="card-img-wrap">${media}</div>
     ${body}
