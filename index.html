@@ -3,374 +3,375 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sean Richardson - Creative & Digital Solutions</title>
+<title>Sean Richardson — Creative & Digital Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-body { 
-  background: #000; 
+body {
+  background: #000;
   font-family: 'Space Grotesk', sans-serif;
   color: #fff;
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
+/* Video Background */
 #bg-video {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   object-fit: cover;
   z-index: -1;
+  opacity: 0.5;
 }
 
-#content {
-  position: relative;
-  z-index: 1;
-}
-
-/* Navigation */
-nav {
+/* Top bar */
+header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: baseline;
-  gap: 2.5rem;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(12px);
+  top: 0; left: 0; right: 0;
   z-index: 100;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.nav-name {
-  color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  margin-right: auto;
-  white-space: nowrap;
-}
-
-.nav-links {
+.header-top {
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
 }
 
-nav a {
-  color: rgba(255,255,255,0.6);
+.name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.contact-link {
+  color: rgba(255,255,255,0.5);
   text-decoration: none;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.8rem;
   transition: color 0.2s;
 }
+.contact-link:hover { color: #fff; }
 
-nav a:hover, nav a.active {
-  color: #fff;
-}
-
-/* Sections */
-section {
+/* Category tabs */
+.tabs {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 2rem 2rem;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-section:first-of-type {
-  padding-top: 5rem;
-}
-
-.panel {
-  background: none;
-  border: none;
-  padding: 3rem;
-  max-width: 1200px;
-  width: 100%;
-}
-
-/* No hero — content starts immediately */
-h1 { display: none; }
-.subtitle { display: none; }
-.tagline { display: none; }
-
-/* Work Section */
-#work .panel {
-  padding: 3rem 2rem;
-}
-
-h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 600;
-  margin-bottom: 3rem;
-  text-align: center;
-  letter-spacing: 0.05em;
+.tab {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.project-card {
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  border: none;
   background: none;
-  border-left: 2px solid rgba(255,255,255,0.15);
-  padding: 1.5rem;
-  transition: all 0.3s ease;
+  white-space: nowrap;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+  font-family: inherit;
 }
 
-.project-card:hover {
-  border-left-color: rgba(255,255,255,0.5);
-  transform: translateX(4px);
+.tab:hover { color: rgba(255,255,255,0.7); }
+.tab.active {
+  color: #fff;
+  border-bottom-color: #fff;
 }
 
-.project-card h3 {
-  font-size: 1rem;
+/* Main content */
+main {
+  padding-top: 110px;
+  min-height: 100vh;
+}
+
+/* Category sections */
+.category {
+  display: none;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.category.active { display: block; }
+
+.category-title {
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
 }
 
-.project-card p {
-  font-size: 0.875rem;
+.category-desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2rem;
+}
+
+/* Project cards with images */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.card:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-2px);
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.card-img.placeholder {
+  background: rgba(255,255,255,0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0.3;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-body h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-body p {
+  font-size: 0.8rem;
   line-height: 1.6;
-  opacity: 0.8;
+  color: rgba(255,255,255,0.6);
 }
 
-/* Skills Section */
-#skills .panel {
-  text-align: center;
+.card-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
 }
+.card-link:hover { color: #fff; }
 
-.skills-list {
+/* Stack tags */
+.stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+  gap: 0.5rem;
   margin-top: 2rem;
 }
 
-.skill-tag {
-  background: none;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 0.5rem 1.25rem;
-  font-size: 0.8rem;
-  font-family: 'Space Mono', monospace;
-  letter-spacing: 0.05em;
-  transition: all 0.2s;
+.stack-tag {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.7rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.03em;
 }
 
-.skill-tag:hover {
-  border-color: rgba(255,255,255,0.5);
-}
-
-/* Contact Section */
-#contact .panel {
+/* Contact section */
+.contact-section {
   text-align: center;
+  padding: 4rem 2rem;
 }
 
-.contact-email {
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  margin: 2rem 0;
+.contact-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-section a {
   color: #fff;
+  font-size: 1.1rem;
   text-decoration: none;
-  display: inline-block;
-  transition: opacity 0.2s;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 2px;
 }
 
-.contact-email:hover {
-  opacity: 0.7;
+.contact-section p {
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
 }
 
-.location {
-  font-size: 1rem;
-  opacity: 0.7;
-  margin-top: 1rem;
-}
-
-/* Mobile Responsive */
+/* Mobile */
 @media (max-width: 768px) {
-  nav {
-    gap: 1.5rem;
-    padding: 1rem;
-  }
-  
-  .panel {
-    padding: 2rem 1.5rem;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  section {
-    padding: 3rem 1rem;
-  }
+  .header-top { padding: 0.75rem 1rem; }
+  .tabs { padding: 0 0.5rem; }
+  .tab { padding: 0.6rem 1rem; font-size: 0.65rem; }
+  .projects { grid-template-columns: 1fr; }
+  .category { padding: 1.5rem 1rem; }
+  main { padding-top: 100px; }
 }
 </style>
 </head>
 <body>
+
 <video id="bg-video" autoplay muted loop playsinline>
   <source src="bg2.mp4" type="video/mp4">
 </video>
 
-<div id="content">
-  <nav>
-    <span class="nav-name">Sean Richardson</span>
-    <div class="nav-links">
-      <a href="#ai">AI</a>
-      <a href="#web">WEB</a>
-      <a href="#design">DESIGN</a>
-      <a href="#media">MEDIA</a>
-      <a href="#contact">CONTACT</a>
+<header>
+  <div class="header-top">
+    <span class="name">Sean Richardson</span>
+    <a href="mailto:seandrives009@gmail.com" class="contact-link">seandrives009@gmail.com</a>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-cat="all">ALL</button>
+    <button class="tab" data-cat="ai">AI & AUTOMATION</button>
+    <button class="tab" data-cat="web">WEB DEV</button>
+    <button class="tab" data-cat="design">DESIGN & BRANDING</button>
+    <button class="tab" data-cat="media">MEDIA & CONTENT</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ALL -->
+  <div class="category active" id="cat-all">
+    <div class="category-title">All Work</div>
+    <div class="category-desc">AI systems, web development, design, and media production. Southern California.</div>
+    <div class="projects" id="all-grid"></div>
+  </div>
+
+  <!-- AI -->
+  <div class="category" id="cat-ai">
+    <div class="category-title">AI & Automation</div>
+    <div class="category-desc">Autonomous agents, ML pipelines, and intelligent automation systems.</div>
+    <div class="projects" id="ai-grid"></div>
+  </div>
+
+  <!-- WEB -->
+  <div class="category" id="cat-web">
+    <div class="category-title">Web Development</div>
+    <div class="category-desc">Full-stack sites, performance optimization, and custom web applications.</div>
+    <div class="projects" id="web-grid"></div>
+  </div>
+
+  <!-- DESIGN -->
+  <div class="category" id="cat-design">
+    <div class="category-title">Design & Branding</div>
+    <div class="category-desc">Logo systems, infographics, AI-generated visuals, and brand identity.</div>
+    <div class="projects" id="design-grid"></div>
+  </div>
+
+  <!-- MEDIA -->
+  <div class="category" id="cat-media">
+    <div class="category-title">Media & Content</div>
+    <div class="category-desc">Video production, audio engineering, and content pipelines.</div>
+    <div class="projects" id="media-grid"></div>
+  </div>
+
+  <div class="contact-section">
+    <h2>Let's work together</h2>
+    <a href="mailto:seandrives009@gmail.com">seandrives009@gmail.com</a>
+    <p>Based in Southern California</p>
+  </div>
+</main>
+
+<script>
+const projects = [
+  // AI
+  { cat: 'ai', title: 'Autonomous AI Agent System', img: 'img/empire-overview.jpg',
+    desc: 'Multi-platform AI agent with persistent memory, cron scheduling, cross-channel messaging across Telegram, Discord, iMessage, and email. Self-healing with fallback models. Handles 20+ simultaneous conversations.' },
+  { cat: 'ai', title: 'AI Stem Splitting Pipeline', img: 'img/shader-bg.jpg',
+    desc: 'Automated audio stem separation using ML models. Downloads any song, isolates vocals, drums, bass, guitar, piano. Individual drum extraction (kick, snare, hi-hat, ride, crash). Under 60 seconds per song.' },
+  { cat: 'ai', title: 'Semantic Search Engine', img: 'img/recursive-improvement.jpg',
+    desc: 'Custom embedding-based search over 14,000+ text chunks. OpenAI embeddings with cosine similarity for instant semantic retrieval across massive document collections.' },
+  { cat: 'ai', title: 'Automated Outreach System', img: 'img/discord-workflows.jpg',
+    desc: 'Reddit and email automation managing 20+ simultaneous client conversations. Browser automation for lead generation, intelligent response routing, and conversation management.' },
+  { cat: 'ai', title: 'AI Grant Writer', img: 'img/calendar-prep.jpg',
+    desc: 'Automated research and drafting for small business grants. Pulls eligibility data, matches to frameworks like 5C and Genesis for Good, produces submission-ready applications.' },
+  { cat: 'ai', title: 'Canvas LMS Automation', img: 'img/todo-tackler.jpg',
+    desc: 'API-driven course automation. Auto-downloads assignments, reads rubrics, generates essays calibrated to professor voice, manages quiz submissions. Full academic workflow.' },
+
+  // WEB
+  { cat: 'web', title: 'Crypto Casino Leaderboard', img: 'img/prophitz.jpg',
+    desc: '3 complete design concepts with animated counters, live stats ticker, interactive sortable tables, prize distribution charts, and countdown timers.',
+    link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
+  { cat: 'web', title: 'Shopify Store Demos', img: 'img/shopify.jpg',
+    desc: 'Custom Shopify storefront demos with product grids, cart functionality, and responsive design.',
+    link: 'https://seanysean12345.github.io/shopify-demos/' },
+  { cat: 'web', title: 'WooCommerce Performance Fix', img: 'img/weekly-checkin.jpg',
+    desc: 'Diagnosed 100% CPU / 503 errors on client store. Found bloated sessions table (29MB, 45% of DB). Cleared caches, ran migration. CPU spikes eliminated.' },
+  { cat: 'web', title: 'GLSL Shader Backgrounds', img: 'img/shader-bg.jpg',
+    desc: 'Custom WebGL shaders for animated website backgrounds. Procedural fog, noise, scan lines, film grain. Zero bandwidth, infinite seamless loop. This site uses one.' },
+
+  // DESIGN
+  { cat: 'design', title: 'SK Dasher — Logo & Brand', img: 'img/sk-dasher-logo.png',
+    desc: 'Full brand identity for SK Dasher. Logo design, color palette, typography system, and brand guidelines. SVG + PDF deliverables.' },
+  { cat: 'design', title: 'AI Workflow Infographics', img: 'img/empire-overview.jpg',
+    desc: 'Suite of AI-generated infographics visualizing system architecture, workflow automation, and strategic planning frameworks.' },
+  { cat: 'design', title: 'Recursive Self-Improvement', img: 'img/recursive-improvement.jpg',
+    desc: 'AI-generated visualization of recursive self-improvement concepts. Multiple iterations refined through prompt engineering.' },
+  { cat: 'design', title: 'Valentine Demon Series', img: 'img/valentine-art.jpg',
+    desc: '16-iteration AI art series. Dark romantic aesthetic with demon/angel themes. Refined through progressive prompt engineering across multiple models.' },
+  { cat: 'design', title: 'Reverse Prompting System', img: 'img/reverse-prompting.jpg',
+    desc: 'Visual breakdown of the reverse prompting technique for AI taste profiling. Used to extract aesthetic preferences through reaction analysis.' },
+
+  // MEDIA
+  { cat: 'media', title: 'AI Video Generation', img: 'img/shader-bg.jpg',
+    desc: 'Remotion templates and Veo 2/3.1 video generation. Configurable promo videos with AI voiceover via ElevenLabs. Scalable template system for rapid content production.' },
+  { cat: 'media', title: 'Audio Stem Engineering', img: 'img/discord-workflows.jpg',
+    desc: 'ML-powered audio separation pipeline. 6-stem splitting (vocals, drums, bass, guitar, piano, other) plus individual drum hit extraction. Processing any song in under 60 seconds.' },
+  { cat: 'media', title: 'Content Pipeline Systems', img: 'img/todo-tackler.jpg',
+    desc: 'Multi-platform content automation. Transcription, summarization, cross-posting, TTS integration. Built for scale across Telegram, Discord, and web.' },
+];
+
+function renderCard(p) {
+  return `<div class="card">
+    <img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-body">
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
     </div>
-  </nav>
+  </div>`;
+}
 
-  <section id="ai">
-    <div class="panel">
-      <h2>AI & Automation</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Autonomous AI Agent System</h3>
-          <p>Multi-platform AI agent with persistent memory, cron scheduling, and cross-channel messaging. Handles Telegram, Discord, iMessage, and email simultaneously. Self-healing with fallback models.</p>
-        </div>
-        <div class="project-card">
-          <h3>AI Stem Splitting Pipeline</h3>
-          <p>Automated audio stem separation using ML models. Downloads any song, isolates vocals, drums, bass, guitar, piano. Individual drum hit extraction (kick, snare, hi-hat, ride, crash).</p>
-        </div>
-        <div class="project-card">
-          <h3>Automated Outreach System</h3>
-          <p>Reddit and email automation managing 20+ simultaneous client conversations. Browser automation for lead gen, intelligent response routing, conversation management.</p>
-        </div>
-        <div class="project-card">
-          <h3>AI Grant Writer</h3>
-          <p>Automated research and drafting for small business grants. Pulls eligibility data, matches to frameworks, produces submission-ready applications.</p>
-        </div>
-        <div class="project-card">
-          <h3>Semantic Search Engine</h3>
-          <p>Built custom embedding-based search over 14,000+ text chunks. OpenAI embeddings, cosine similarity, instant semantic retrieval across massive document collections.</p>
-        </div>
-        <div class="project-card">
-          <h3>Canvas LMS Automation</h3>
-          <p>API-driven course automation. Auto-downloads assignments, reads rubrics, generates essays calibrated to professor voice, manages quiz submissions.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+// Fill grids
+document.getElementById('all-grid').innerHTML = projects.map(renderCard).join('');
+['ai','web','design','media'].forEach(cat => {
+  document.getElementById(cat + '-grid').innerHTML =
+    projects.filter(p => p.cat === cat).map(renderCard).join('');
+});
 
-  <section id="web">
-    <div class="panel">
-      <h2>Web Development</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Crypto Casino Leaderboard</h3>
-          <p>3 complete design concepts with animated counters, live stats ticker, interactive sortable tables, prize distribution charts, countdown timers. Deployed to GitHub Pages.</p>
-        </div>
-        <div class="project-card">
-          <h3>WooCommerce Performance Fix</h3>
-          <p>Diagnosed 100% CPU / 503 errors on client's store. Found bloated sessions table (29MB, 45% of DB). Cleared caches, ran migration. CPU spikes eliminated.</p>
-        </div>
-        <div class="project-card">
-          <h3>GLSL Shader Backgrounds</h3>
-          <p>Custom WebGL shaders for animated website backgrounds. Procedural fog, noise, scan lines, film grain. Zero bandwidth, infinite seamless loop. You're looking at one right now.</p>
-        </div>
-        <div class="project-card">
-          <h3>Portfolio & Business Sites</h3>
-          <p>One-page portfolio sites, business landing pages, Shopify stores. Vercel deployment, responsive design, performance-first.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="design">
-    <div class="panel">
-      <h2>Design & Branding</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Brand Identity Systems</h3>
-          <p>Logo design, color palettes, typography systems, brand guidelines. Research-driven identity development matched to target audience.</p>
-        </div>
-        <div class="project-card">
-          <h3>AI Image Generation</h3>
-          <p>Nano Banana Pro, DALL-E, Midjourney workflows. Mockup generation, concept art, marketing visuals. Prompt engineering for consistent brand-aligned output.</p>
-        </div>
-        <div class="project-card">
-          <h3>UI/UX Design</h3>
-          <p>Dashboard interfaces, mobile-first layouts, interactive prototypes. Taste-driven design system with documented preferences and cross-domain pattern recognition.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="media">
-    <div class="panel">
-      <h2>Media Production</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>AI Video Generation</h3>
-          <p>Remotion templates, Veo 2/3.1 video generation, configurable promo videos with AI voiceover via ElevenLabs. Scalable template system.</p>
-        </div>
-        <div class="project-card">
-          <h3>Audio Engineering</h3>
-          <p>Stem splitting, sample identification, music production tools. ML-powered audio separation pipeline processing any song in under 60 seconds.</p>
-        </div>
-        <div class="project-card">
-          <h3>Content Systems</h3>
-          <p>Multi-platform content pipelines. Automated transcription, summarization, cross-posting. TTS integration for voice content at scale.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills-section">
-    <div class="panel" style="text-align:center;">
-      <h2>Stack</h2>
-      <div class="skills-list">
-        <span class="skill-tag">Claude / GPT</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Node.js</span>
-        <span class="skill-tag">React</span>
-        <span class="skill-tag">Next.js</span>
-        <span class="skill-tag">WebGL / GLSL</span>
-        <span class="skill-tag">WordPress</span>
-        <span class="skill-tag">n8n</span>
-        <span class="skill-tag">Vercel</span>
-        <span class="skill-tag">Supabase</span>
-        <span class="skill-tag">Tailwind</span>
-        <span class="skill-tag">Remotion</span>
-        <span class="skill-tag">ElevenLabs</span>
-        <span class="skill-tag">Browser Automation</span>
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">Docker</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="panel" style="text-align:center;">
-      <h2>Contact</h2>
-      <a href="mailto:seandrives009@gmail.com" class="contact-email">seandrives009@gmail.com</a>
-      <p class="location">Southern California</p>
-    </div>
-  </section>
-</div>
-
-
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('cat-' + tab.dataset.cat).classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
