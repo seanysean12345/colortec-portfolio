@@ -161,29 +161,13 @@ main { padding-top: 100px; }
   transform: scale(1.02);
 }
 
-.card-img-wrap {
-  width: 100%;
-}
-
 .card-img, .card-video {
   width: 100%;
   display: block;
+  border-radius: 2px;
 }
 
-.card-body { padding: 0.8rem 1rem; }
-.card-body h3 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
-.card-body p { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.5); }
-.card-link {
-  display: inline-block;
-  margin-top: 0.6rem;
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.4);
-  text-decoration: none;
-  transition: color 0.2s;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.card-link:hover { color: #fff; }
+
 
 /* ======= DOT INDICATORS ======= */
 .carousel-dots {
@@ -334,14 +318,7 @@ function card(p) {
   const media = p.video
     ? `<video class="card-video" src="${p.video}" autoplay muted loop playsinline></video>`
     : `<img class="card-img" src="${p.img}" alt="${p.title}" loading="lazy">`;
-  const body = `<div class="card-body">
-      <h3>${p.title}</h3>
-      ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">VIEW LIVE →</a>` : ''}
-    </div>`;
-  return `<div class="card">
-    <div class="card-img-wrap">${media}</div>
-    ${body}
-  </div>`;
+  return `<div class="card" ${p.link ? `onclick="window.open('${p.link}','_blank')" style="cursor:pointer"` : ''}>${media}</div>`;
 }
 
 // Carousel class
