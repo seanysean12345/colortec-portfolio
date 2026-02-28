@@ -194,6 +194,7 @@ main { padding-top: 100px; }
   </div>
   <div class="tabs">
     <button class="tab active" data-cat="all">ALL WORK</button>
+    <button class="tab" data-cat="design">DESIGN</button>
     <button class="tab" data-cat="web">WEBSITES</button>
   </div>
 </header>
@@ -213,6 +214,13 @@ main { padding-top: 100px; }
     </div>
   </div>
 
+  <div class="category" id="cat-design">
+    <div class="cat-header"><div class="cat-title">Design</div></div>
+    <div class="carousel-outer">
+      <div class="carousel-track" style="--dur:20s" id="track-design"></div>
+    </div>
+  </div>
+
   <div class="category" id="cat-web">
     <div class="cat-header"><div class="cat-title">Websites</div></div>
     <div class="carousel-outer">
@@ -228,16 +236,20 @@ main { padding-top: 100px; }
 
 <script>
 const work = [
-  { title: 'Prophitz × Razed Leaderboard', img: 'img/prophitz.jpg',
+  { cat: 'design', title: '24K Dashooter — Logo', img: 'img/24k-dashooter-logo.jpg',
+    desc: 'Brand logo design. Gold 3D lettering with film strip motif.' },
+  { cat: 'design', title: '24K Dashooter — Birthday Invite', img: 'img/birthday-card.jpg',
+    desc: 'Custom Roblox-themed party invitation. Full layout and typography.' },
+  { cat: 'web', title: 'Prophitz × Razed Leaderboard', img: 'img/prophitz.jpg',
     desc: '$5,000 prize pool. Animated counters, live stats, sortable rankings.',
     link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
-  { title: 'Streetwear Store', img: 'img/shopify-streetwear.jpg',
+  { cat: 'web', title: 'Streetwear Store', img: 'img/shopify-streetwear.jpg',
     desc: 'Shopify storefront. Product grid, responsive layout, full cart.',
     link: 'https://seanysean12345.github.io/shopify-demos/streetwear.html' },
-  { title: 'Coffee Shop Store', img: 'img/shopify-coffee.jpg',
+  { cat: 'web', title: 'Coffee Shop Store', img: 'img/shopify-coffee.jpg',
     desc: 'Shopify storefront. Clean product display, mobile-first design.',
     link: 'https://seanysean12345.github.io/shopify-demos/coffee.html' },
-  { title: 'Tech Accessories Store', img: 'img/shopify-tech.jpg',
+  { cat: 'web', title: 'Tech Accessories Store', img: 'img/shopify-tech.jpg',
     desc: 'Shopify storefront. Product cards, category filters, responsive.',
     link: 'https://seanysean12345.github.io/shopify-demos/tech-store.html' },
 ];
@@ -256,7 +268,12 @@ function card(p) {
 // Duplicate for infinite scroll
 const allCards = [...work, ...work].map(card).join('');
 document.getElementById('track-all').innerHTML = allCards;
-document.getElementById('track-web').innerHTML = allCards;
+
+const designItems = work.filter(p => p.cat === 'design');
+document.getElementById('track-design').innerHTML = [...designItems, ...designItems].map(card).join('');
+
+const webItems = work.filter(p => p.cat === 'web');
+document.getElementById('track-web').innerHTML = [...webItems, ...webItems].map(card).join('');
 
 // Tabs
 document.querySelectorAll('.tab').forEach(tab => {
