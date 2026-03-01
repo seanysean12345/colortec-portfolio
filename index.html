@@ -149,7 +149,11 @@ main { padding-top: 100px; }
 
 /* ======= CARDS ======= */
 .card {
-  width: 50vw;
+  width: 40vw;
+  max-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.15s;
 }
 .card:hover { 
@@ -157,7 +161,8 @@ main { padding-top: 100px; }
 }
 
 .card-img, .card-video {
-  width: 100%;
+  max-width: 100%;
+  max-height: 65vh;
   display: block;
   border-radius: 2px;
 }
@@ -229,7 +234,8 @@ main { padding-top: 100px; }
 }
 
 @media (max-width: 768px) {
-  .card { width: 75vw; }
+  .card { width: 70vw; max-height: 50vh; }
+  .card-img, .card-video { max-height: 50vh; }
   .header-top { padding: 0.7rem 1rem; }
   .text-list { padding: 1rem; }
   .carousel-outer { min-height: auto; }
