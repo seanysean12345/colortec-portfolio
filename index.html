@@ -92,10 +92,11 @@ main { padding-top: 100px; display: flex; flex-direction: column; min-height: 10
 .carousel-outer {
   position: relative;
   padding: 2rem 0 4rem;
-  min-height: auto;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 .carousel-container {
@@ -170,7 +171,7 @@ main { padding-top: 100px; display: flex; flex-direction: column; min-height: 10
 /* ======= DOT INDICATORS ======= */
 .carousel-dots {
   position: absolute;
-  bottom: -2rem;
+  bottom: -3rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -295,7 +296,7 @@ main { padding-top: 100px; display: flex; flex-direction: column; min-height: 10
 <script>
 const work = [
   { cat: 'design', title: '24K Dashooter — Logo', img: 'img/24k-dashooter-logo.jpg' },
-  { cat: 'design', title: '24K Dashooter — Birthday Invite', img: 'img/birthday-card.jpg?v=2' },
+  { cat: 'design', title: '24K Dashooter — Birthday Invite', img: 'img/birthday-card.jpg?v=3' },
   { cat: 'web', title: 'Prophitz × Razed Leaderboard', video: 'img/prophitz.mp4',
     desc: '$5,000 prize pool. Animated counters, live stats, sortable rankings.',
     link: 'https://seanysean12345.github.io/prophitz-leaderboard/' },
